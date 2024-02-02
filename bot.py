@@ -1,7 +1,16 @@
 import requests
 import telebot
 
-bot = telebot.TeleBot('6121118235:AAGdNmeJapt2o0iRJTvsRz56zx6uNIdKXOQ') 
+bot = telebot.TeleBot('6121118235:AAGdNmeJapt2o0iRJTvsRz56zx6uNIdKXOQ')
+
+@bot.message_handler(commands=['start']) 
+def send_welcome(message):
+  bot.reply_to(message, "Welcome!")
+
+# Set webhook
+url = f"https://api.telegram.org/bot{bot.token}/setWebhook"
+data = {'url': 'https://github.com/Deviprasadhack/Qrcode-generator'}
+requests.post(url, data=data)
 
 @bot.message_handler(commands=['generate_qr'])  
 def generate_qr(message):
